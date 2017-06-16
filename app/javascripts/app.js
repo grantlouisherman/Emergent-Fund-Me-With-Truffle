@@ -57,8 +57,10 @@ window.App = {
       return meta.addProposal(amount,description,name,{data: Organization.code, 
         from: web3.eth.accounts[0], gas: 4700000})
     }).then(function(value) {
-        console.log("WORKS!!!")
         console.log(value)
+        document.getElementById("creationHash").innerHTML =  value.receipt.blockHash;
+        document.getElementById("creationReceiptTitle").innerHTML =  value.receipt.blockNumber;
+        document.getElementById("transHash").innerHTML =  value.receipt.transactionHash
     }).catch(function(e) {
       console.log(e);
     });
@@ -75,6 +77,7 @@ window.App = {
     })
     .then(updatedVotes => {
       console.log(updatedVotes);
+      location.reload();
     })
     .catch(function(e) {
       console.log(e);
@@ -97,6 +100,29 @@ window.App = {
       document.getElementById("one").innerHTML = votes[1];
       document.getElementById("two").innerHTML = votes[2];
     })
+  },
+
+  createComitte: function(){
+    var self = this;
+    var meta;
+
+    Organization.deployed().then(function(instance) {
+      meta = instance;
+      const name = document.getElementById('comiteeName').value;
+      const statement = document.getElementById('statement').value;
+      const funds = document.getElementById('funds').value;  
+      const memmbers = document.getElementById('memmbers').value.split(",");
+
+      return meta.addCommittee(name,statement,funds,memmbers,{data: Organization.code, 
+        from: web3.eth.accounts[0], gas: 4700000})
+    }).then(function(value) {
+        console.log(value)
+        document.getElementById("creationHash").innerHTML =  value.receipt.blockHash;
+        document.getElementById("creationReceiptTitle").innerHTML =  value.receipt.blockNumber;
+        document.getElementById("transHash").innerHTML =  value.receipt.transactionHash
+    }).catch(function(e) {
+      console.log(e);
+    });
   }
 
 

@@ -20,7 +20,7 @@
   </div>
 
       <div style="float:left; width:30%">
-          <div class="form-group">
+          <div class="form-group col-lg-1">
               <label for="propName">
                 Proposal Name
                 <input type="text" id="propName"   />
@@ -44,8 +44,13 @@
           </div>
           </div>
           
-          <div style="float:left; width:40%; margin-left:50px">
-             <div class="form-group">
+          <div style="float:left; width:40%; margin-left:100px">
+             <div class="form-group col-lg-1">
+            <label for="comiteeName">
+                Name
+                <input type="text" id="comiteeName"   />
+              </label>
+              <br   />
               <label for="statement">
                 Mission Statement
                 <input type="text" id="statement"   />
@@ -64,8 +69,8 @@
               </label>
 
               <br   />
-              <h1>Create A Comittee</h1>
-              <br><br><button id="send" onclick="App.addProposal()">Create Proposal</button>
+              <h1>Create A Committee</h1>
+              <br><br><button id="send" onclick="App.addProposal()">Create A Comittee</button>
             </div>
           </div>
      <div>
@@ -116,8 +121,16 @@
       </tr>
     </tbody>
   </table>
+  <div class="card" style="margin-bottom:30px;">
+    <div class="card-block">
+      <h3>Transaction Receipt</h3>
+      <h4 class="card-title" id="creationReceiptTitle"></h4>
+      <h6 class="card-subtitle mb-2 text-muted" id="creationHash"></h6>
+      <h6 class="card-subtitle mb-2 text-muted" id="transHash"></h6>
+      <img src="https://metamask.io/img/metamask.png" height="50" width="50" />
+    </div>
+  </div>
 </div>
-
 </body>
 </html>
 </body>
