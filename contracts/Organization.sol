@@ -20,11 +20,10 @@ contract Organization {
   event ProposalAdded(uint code, uint amount, string description, int numberOfVotes , string name);
 
 
-  function addProposal(uint amount, string description , string name) returns (uint , string, string) {
+  function addProposal(uint amount, string description , string name) {
     proposals.push(Proposal(numberOfProposals,amount,description,0,name));
     ProposalAdded(numberOfProposals,amount,description, 0, name);
     numberOfProposals++;
-    return (amount, description, name);
     
   }
 
@@ -45,6 +44,10 @@ contract Organization {
 
     function getProposalName(uint index) returns (string){
         return proposals[index].name;
+    }
+
+    function getProposalAmount(uint index) returns (uint){
+        return proposals[index].amount;
     }
 
     function getProposal(uint index) returns (uint , string, string){

@@ -17,6 +17,7 @@ var Organization = contract(organization_artifacts);
 var accounts;
 var account;
 var numberOfProposals=0;
+
 window.App = {
   start: () =>  {
     var self = this;
@@ -24,6 +25,7 @@ window.App = {
     // Bootstrap the MetaCoin abstraction for Use.
     Organization.setProvider(web3.currentProvider);
     // Get the initial account balance so it can be displayed.
+  
     web3.eth.getAccounts(function(err, accs) {
       if (err != null) {
         alert("There was an error fetching your accounts.");
@@ -37,17 +39,16 @@ window.App = {
 
       accounts = accs;
       account = accounts[9];
-
+      
     });
   },
-
+ 
   addProposal: function() {
     var self = this;
-
     var meta;
+
     Organization.deployed().then(function(instance) {
       meta = instance;
-      
       const name = document.getElementById('propName').value;
       const amount = document.getElementById('startingFunds').value;  
       const description = document.getElementById('propDescription').value;
@@ -60,34 +61,10 @@ window.App = {
     }).catch(function(e) {
       console.log(e);
     });
-  },
+  }
 
   
-  getProposals: function(){
-    var self = this;
-    var meta;
-    Organization.deployed().then(function(instance) {
-      meta = instance;
-      return meta.numOfProposals.call();
-    })
-    .then(nums => {
-      let length = nums.c[0];
-      let arr = [];
-      for(let i = 0;i<length;i++){
-        arr.push(meta.getProposalName.call(i))
-        arr.push(meta.getProposalVotesIndex.call(i))
-      }
-      return Promise.all(arr);
-    })
-    .then(name => {
-      console.log(name)
-      document.getElementById("proposals").innerHTML = '<h1>'+name[0] +'</h1>'+ '  '
-      +'<h2>'+name[1]+'</h2>';
-    })
-    .catch(err =>{
-      console.log(err);
-    })
-  }
+
 
 };
 
@@ -104,7 +81,6 @@ window.addEventListener('load', function() {
   }
 
   App.start();
-  App.getProposals()
 });
 
 
