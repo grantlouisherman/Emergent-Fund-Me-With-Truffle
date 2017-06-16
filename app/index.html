@@ -11,7 +11,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body style="margin:20px;">
-
+  <div class="card" style="margin-bottom:30px;">
+    <div class="card-block">
+      <h4 class="card-title">Current User:</h4>
+      <h6 class="card-subtitle mb-2 text-muted" id="accountInfo">Card subtitle</h6>
+      <img src="https://metamask.io/img/metamask.png" height="50" width="50" />
+    </div>
+  </div>
   <div class="form-group">
       <label for="propName">
         Proposal Name
@@ -42,6 +48,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Amount($)</th>
+        <th>Number of Votes</th>
         <th></th>
       </tr>
     </thead>
@@ -54,7 +61,8 @@
           sodales ut justo. Sed vitae mi nec eros luctus rhoncus in vitae augue. 
           </td>
         <td>100</td>
-        <td><button class="btn btn-default">Vote</button></td>
+        <td id="zero"></td>
+        <td><button class="btn btn-default" onclick="App.voteForProposal(0)">Vote</button></td>
       </tr>
       <tr>
         <td>Want to buy a motorcycle!</td>
@@ -64,7 +72,8 @@
           sodales ut justo. Sed vitae mi nec eros luctus rhoncus in vitae augue. 
           </td>
         <td>100</td>
-        <td><button class="btn btn-default">Vote</button></td>
+         <td id="one"></td>
+        <td><button class="btn btn-default" onclick="App.voteForProposal(1)">Vote</button></td>
       </tr>
       <tr>
         <td>Help I need money!!!</td>
@@ -74,7 +83,8 @@
           sodales ut justo. Sed vitae mi nec eros luctus rhoncus in vitae augue. 
           </td>
         <td>100</td>
-        <td><button class="btn btn-default">Vote</button></td>
+         <td id="two"></td>
+        <td><button class="btn btn-default" onclick="App.voteForProposal(2)">Vote</button></td>
       </tr>
     </tbody>
   </table>

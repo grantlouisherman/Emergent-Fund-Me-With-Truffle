@@ -39,6 +39,7 @@ window.App = {
 
       accounts = accs;
       account = accounts[9];
+      document.getElementById('accountInfo').innerHTML = account;
       
     });
   },
@@ -61,9 +62,42 @@ window.App = {
     }).catch(function(e) {
       console.log(e);
     });
-  }
+  },
 
-  
+  voteForProposal:function(index){
+         var self = this;
+          var meta;
+
+    Organization.deployed().then(function(instance) {
+      meta = instance;
+      return meta.voteForProposal(index,{data: Organization.code, 
+        from: web3.eth.accounts[0], gas: 4700000 })
+    })
+    .then(updatedVotes => {
+      console.log(updatedVotes);
+    })
+    .catch(function(e) {
+      console.log(e);
+    });
+  },
+
+  getVotes: function(){
+    var self = this;
+    var meta;
+    Organization.deployed().then(function(instance) {
+      meta= instance;
+      let votesArray = []
+      for(let i=0;i<3;i++){
+        votesArray.push(meta.getProposalVotesIndex.call(i))
+      }
+      return Promise.all(votesArray);
+    })
+    .then(votes => {
+      document.getElementById("zero").innerHTML = votes[0];
+      document.getElementById("one").innerHTML = votes[1];
+      document.getElementById("two").innerHTML = votes[2];
+    })
+  }
 
 
 };
@@ -79,8 +113,9 @@ window.addEventListener('load', function() {
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
   }
-
+  
   App.start();
+  App.getVotes();
 });
 
 

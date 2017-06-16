@@ -15,11 +15,13 @@ contract Organization {
 
   Proposal[] public proposals;
   uint public numberOfProposals;
- 
   
+  bytes32[] public proposalList; 
+  
+
+
   event ProposalAdded(uint code, uint amount, string description, int numberOfVotes , string name);
-
-
+  
   function addProposal(uint amount, string description , string name) {
     proposals.push(Proposal(numberOfProposals,amount,description,0,name));
     ProposalAdded(numberOfProposals,amount,description, 0, name);
@@ -27,7 +29,7 @@ contract Organization {
     
   }
 
-
+  
 
   function proposalExists (uint code) returns (bool) {
     for(uint i = 0; i < proposals.length; i++) {
@@ -68,8 +70,9 @@ contract Organization {
       return 1000000;
     }
     
-    function voteForProposal(uint index) {
+    function voteForProposal(uint index) returns (uint) {
         proposals[index].numberOfVotes++;
+        return proposals[index].numberOfVotes;
       }
 
     function getProposalVotesIndex(uint index) returns (uint) {
@@ -94,7 +97,15 @@ contract Organization {
     }
     return string(bytesStringTrimmed);
   }
-
+  
+  function Organization(bytes32[] names) {
+      proposalList = names;
+      for(uint i =0;i<names.length;i++){
+        addProposal(100, 
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dui nisi, laoreet ut auctor sed, sodales ut justo. Sed vitae mi nec eros luctus rhoncus in vitae augue.",
+        bytes32ToString(names[i]));
+      }
+    }
 
 }
 
