@@ -47,8 +47,11 @@ contract Organization {
         return proposals[index].name;
     }
 
-    function getProposalDescription(uint index) returns (string){
-        return proposals[index].description;
+    function getProposal(uint index) returns (uint , string, string){
+        uint amount = proposals[index].amount;
+        string name = proposals[index].name;
+        string description = proposals[index].description;
+        return (amount, name, description);
     }
 
     function getProposalIndex(string name) returns (uint){

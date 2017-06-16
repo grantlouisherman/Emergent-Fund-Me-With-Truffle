@@ -16,11 +16,11 @@ var Organization = contract(organization_artifacts);
 // For application bootstrapping, check out window.addEventListener below.
 var accounts;
 var account;
-
+var numberOfProposals=0;
 window.App = {
-  start: function() {
+  start: () =>  {
     var self = this;
-
+    
     // Bootstrap the MetaCoin abstraction for Use.
     Organization.setProvider(web3.currentProvider);
     // Get the initial account balance so it can be displayed.
@@ -45,7 +45,6 @@ window.App = {
     var self = this;
 
     var meta;
-    console.log()
     Organization.deployed().then(function(instance) {
       meta = instance;
       
@@ -53,7 +52,8 @@ window.App = {
       const amount = document.getElementById('startingFunds').value;  
       const description = document.getElementById('propDescription').value;
 
-      return meta.addProposal(100,"description","name",{data: Organization.code, from: web3.eth.accounts[0], gas: 4700000})
+      return meta.addProposal(amount,description,name,{data: Organization.code, 
+        from: web3.eth.accounts[0], gas: 4700000})
     }).then(function(value) {
         console.log("WORKS!!!")
         console.log(value)
@@ -62,24 +62,31 @@ window.App = {
     });
   },
 
-
-  getProposals: function() {
+  
+  getProposals: function(){
     var self = this;
     var meta;
     Organization.deployed().then(function(instance) {
-      console.log("IN THE DEPLOYED")
       meta = instance;
       return meta.numOfProposals.call();
-    }).then((numberOfProps) => {
-        console.log(numberOfProps)
-  
-    }).then((name) => {
-
+    })
+    .then(nums => {
+      let length = nums.c[0];
+      let arr = [];
+      for(let i = 0;i<length;i++){
+        arr.push(meta.getProposalName.call(i))
+        arr.push(meta.getProposalVotesIndex.call(i))
+      }
+      return Promise.all(arr);
+    })
+    .then(name => {
       console.log(name)
-    }).catch(function(e) {
-      console.log(e);
-      self.setStatus("Error sending coin; see log.");
-    });
+      document.getElementById("proposals").innerHTML = '<h1>'+name[0] +'</h1>'+ '  '
+      +'<h2>'+name[1]+'</h2>';
+    })
+    .catch(err =>{
+      console.log(err);
+    })
   }
 
 };
@@ -97,4 +104,7 @@ window.addEventListener('load', function() {
   }
 
   App.start();
+  App.getProposals()
 });
+
+
