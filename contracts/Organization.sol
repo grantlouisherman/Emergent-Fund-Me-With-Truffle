@@ -106,6 +106,69 @@ contract Organization {
         bytes32ToString(names[i]));
       }
     }
+  
+    struct Memmber {
+      uint id;
+      string name;
+    }
+
+    struct Commitee {
+      uint id;
+      string name;
+      string missionStatement;
+      uint balance;
+      string [] memmbers;
+    }
+
+    event MemmberAdded(uint id, string name);
+    event CommiteeCreated(string name,string missionStatement );
+
+    string [] public memmbersArray;
+    Memmber [] memmbers;
+    string[] public comitees;
+    uint public numOfComitees = 0;
+    uint public numOfTotalMemmbers = 0;
+    Commitee [] fullComitees;
+
+
+    
+    
+  function convertMemmberStrings (bytes32 [] values) internal returns (string []){  
+            for(uint i=0;i<values.length;i++){
+                MemmberAdded(numOfTotalMemmbers, bytes32ToString(values[i]));
+                memmbersArray.push(bytes32ToString(values[i]));
+                numOfTotalMemmbers++;
+        }
+        return memmbersArray;
+    }
+    
+    
+    function addCommitee 
+    (string name, string missionStatement , uint funds, bytes32 [] values)
+    returns (string)
+    {
+      comitees.push(name);
+      CommiteeCreated(name,missionStatement );
+      fullComitees.push(Commitee(numOfComitees, name, missionStatement, funds, convertMemmberStrings(values)));
+      numOfComitees++;
+      return name;
+    }
+
+    function getComitees (uint index) returns (string){
+      return comitees[index];
+    }
+
+    function numberOfCommitees () returns (uint){
+      return numOfComitees;
+    }
+
+    function createMember (string name) returns(uint){
+      uint id =  numOfTotalMemmbers;
+      memmbers.push(Memmber(numOfTotalMemmbers, name));
+      MemmberAdded(numOfTotalMemmbers,  name);
+      numOfTotalMemmbers++;
+      return  id;
+    }
 
 }
 
