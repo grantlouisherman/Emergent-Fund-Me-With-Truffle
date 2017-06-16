@@ -23,7 +23,6 @@ window.App = {
 
     // Bootstrap the MetaCoin abstraction for Use.
     Organization.setProvider(web3.currentProvider);
-    console.log(web3.eth)
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
       if (err != null) {
@@ -37,21 +36,16 @@ window.App = {
       }
 
       accounts = accs;
-      account = accounts[0];
+      account = accounts[9];
 
-      self.refreshBalance();
     });
-  },
-
-  setStatus: function(message) {
-    var status = document.getElementById("status");
-    status.innerHTML = message;
   },
 
   addProposal: function() {
     var self = this;
 
     var meta;
+    console.log()
     Organization.deployed().then(function(instance) {
       meta = instance;
       
@@ -59,41 +53,23 @@ window.App = {
       const amount = document.getElementById('startingFunds').value;  
       const description = document.getElementById('propDescription').value;
 
-      return meta.addProposal(amount,description,name, {from: account});
+      return meta.addProposal(100,"description","name",{data: Organization.code, from: web3.eth.accounts[0], gas: 4700000})
     }).then(function(value) {
         console.log("WORKS!!!")
         console.log(value)
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("Error getting balance; see log.");
     });
   },
-  refreshBalance: function() {
-    var self = this;
-    var meta;
-    Organization.deployed().then(function(instance) {
-      meta = instance;
-      return meta.getBalance.call(account, {from: account});
-    }).then(function(value) {
-      var balance_element = document.getElementById("balance");
-      balance_element.innerHTML = value.valueOf();
-    }).catch(function(e) {
-      console.log(e);
-      self.setStatus("Error getting balance; see log.");
-    });
-  },
+
 
   getProposals: function() {
     var self = this;
-
-
-    this.setStatus("Initiating transaction... (please wait)");
-    console.log("IN GET PROPS")
     var meta;
     Organization.deployed().then(function(instance) {
       console.log("IN THE DEPLOYED")
       meta = instance;
-      return meta.numOfProposals({from: account});
+      return meta.numOfProposals.call();
     }).then((numberOfProps) => {
         console.log(numberOfProps)
   

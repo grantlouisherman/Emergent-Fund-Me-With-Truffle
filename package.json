@@ -33,5 +33,9 @@
     "web3": "^0.18.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
+  },
+  "dependencies": {
+    "ethereumjs-testrpc": "^3.0.5",
+    "web3": "^0.18.4"
   }
 }
