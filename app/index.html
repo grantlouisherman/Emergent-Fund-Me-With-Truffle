@@ -23,13 +23,13 @@
           <div class="form-group col-lg-1">
               <label for="propName">
                 Proposal Name
-                <input type="text" id="propName"   />
+                <input type="text" id="propName" style="width: 250px"  />
               </label>
               <br   />
               
               <label for="startingFunds">
                 Starting Funds
-                <input type="number" id="startingFunds"   />
+                <input type="number" id="startingFunds"  style="width: 250px" />
               </label>
               <br   />
               
@@ -40,7 +40,7 @@
 
               <br   />
               <h1>Create A Proposal</h1>
-              <br><br><button id="send" onclick="App.addProposal()">Create Proposal</button>
+              <br><br><button id="send" onclick="App.addProposal()" class="btn btn-primary">Create Proposal</button>
           </div>
           </div>
           
@@ -48,29 +48,29 @@
              <div class="form-group col-lg-1">
             <label for="comiteeName">
                 Name
-                <input type="text" id="comiteeName"   />
+                <input type="text" id="comiteeName"  style="width: 250px"  />
               </label>
               <br   />
               <label for="statement">
                 Mission Statement
-                <input type="text" id="statement"   />
+                <input type="text" id="statement"  style="width: 250px"  />
               </label>
               <br   />
               
               <label for="funds">
                 Funds
-                <input type="number" id="funds"   />
+                <input type="number" id="funds"  style="width: 250px"  />
               </label>
               <br   />
               
               <label for="memmbers">
                 Memmbers
-                <input  id="memmbers" />
+                <input  id="memmbers" style="width: 250px" />
               </label>
 
               <br   />
               <h1>Create A Committee</h1>
-              <br><br><button id="send" onclick="App.addProposal()">Create A Comittee</button>
+              <br><br><button id="send" onclick="App.addProposal()" class="btn btn-primary">Create A Comittee</button>
             </div>
           </div>
      <div>
@@ -87,7 +87,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>Raising Money for Housing Project </td>
+        <td>Biologoy PHD Looking to fund project </td>
         <td>Lorem ipsum dolor sit amet, 
           consectetur adipiscing elit. 
           Curabitur dui nisi, laoreet ut auctor sed, 
@@ -95,10 +95,10 @@
           </td>
         <td>100</td>
         <td id="zero"></td>
-        <td><button class="btn btn-default" onclick="App.voteForProposal(0)">Vote</button></td>
+        <td><button class="btn btn-default" onclick="App.voteForProposal(0)" class="btn btn-primary">Vote</button></td>
       </tr>
       <tr>
-        <td>Want to buy a motorcycle!</td>
+        <td>Columbia Post Doc team needs help!</td>
         <td>Lorem ipsum dolor sit amet, 
           consectetur adipiscing elit. 
           Curabitur dui nisi, laoreet ut auctor sed, 
@@ -106,10 +106,10 @@
           </td>
         <td>100</td>
          <td id="one"></td>
-        <td><button class="btn btn-default" onclick="App.voteForProposal(1)">Vote</button></td>
+        <td><button class="btn btn-default" onclick="App.voteForProposal(1)" class="btn btn-primary">Vote</button></td>
       </tr>
       <tr>
-        <td>Help I need money!!!</td>
+        <td>Patent Help!</td>
         <td>Lorem ipsum dolor sit amet, 
           consectetur adipiscing elit. 
           Curabitur dui nisi, laoreet ut auctor sed, 
@@ -117,10 +117,18 @@
           </td>
         <td>100</td>
          <td id="two"></td>
-        <td><button class="btn btn-default" onclick="App.voteForProposal(2)">Vote</button></td>
+        <td><button class="btn btn-default" onclick="App.voteForProposal(2)" class="btn btn-primary">Vote</button></td>
       </tr>
     </tbody>
   </table>
+    <div class="row">
+      <div class="col-md-6 input-group">
+        <input class="form-control" type="text" />
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button">Comment</button>
+        </span>
+      </div>
+    </div>
   <div class="card" style="margin-bottom:30px;">
     <div class="card-block">
       <h3>Transaction Receipt</h3>

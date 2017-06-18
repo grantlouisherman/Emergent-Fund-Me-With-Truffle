@@ -143,7 +143,7 @@ contract Organization {
     }
     
     
-    function addCommitee 
+    function addCommittee
     (string name, string missionStatement , uint funds, bytes32 [] values)
     returns (string)
     {
